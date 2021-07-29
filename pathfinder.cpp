@@ -32,43 +32,6 @@ int main(int arg, char *argv[])
   
 
   bool a=graph->buildGraphFromFile(argv[1]);
-  string short5="";
-  string short43="";
-  string short44="";
-  string short11;
-  string short12;
-  string short13;
-  string short14;
-  string short15;
-  string short65;
-  string short66;
-  string short67;
-  /*graph->Dijkstra("Robert Downey Jr.","Chris Evans",short11);
-  graph->Dijkstra("Amy Adams","Nicole Kidman",short12);
-  graph->Dijkstra("Will Smith","Bruce Willis",short13);
-  graph->Dijkstra("James McAvoy","Michael Fassbender",short14);
-  graph->Dijkstra("fgmkldfmgd", "dgkldfgmdf",short65);
-  graph->BFS("Will Smith","Bruce Willis",short67);
-  graph->Dijkstra("Djimon Hounsou","50 Cent",short15);
-  graph->Dijkstra("Yoko Motai","Ye-ji Seo",short66);
-  cout<<"Finished Dijkstras"<<endl;
-  graph->BFS("Will Smith","Bruce Willis",short67);*/
-  //cout<<short5<<endl;
-  //cout<<short43<<endl;
-  /*cout<<short44<<endl;
-  cout<<short11<<endl;
-  cout<<short12<<endl;
-  cout<<short13<<endl;
-  cout<<short14<<endl;
-  cout<<short65<<endl;
-  cout<<short15<<endl;
-  cout<<short66<<endl;
-  cout<<short67<<endl;
-  cout<<"The whole thing is done" << endl;
-  return 0;*/
-  //graph->Dijkstra("Michael Daly","Vijayachander",short66);
-  //cout<<short66<<endl;
-  //return 0;
   ifstream infile(argv[3]);
     bool Header = false;
     vector<string> actor1;
