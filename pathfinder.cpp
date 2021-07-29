@@ -136,10 +136,6 @@ int main(int arg, char *argv[])
         }
     }
     
-    /*for(unsigned int x=0;x<pathways.size();x++)
-    {
-        outputFile<<pathways[x]<<endl;
-    }*/
     outputFile.close();
 
 
