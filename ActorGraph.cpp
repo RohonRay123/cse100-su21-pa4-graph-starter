@@ -1,3 +1,6 @@
+
+
+
 /**
  * TODO: add file header
  */
@@ -118,13 +121,12 @@ bool ActorGraph::buildGraphFromFile(const char* filename) {
               n2.push_back(n);
               edgetonode[ef]=n2;
               nodeRecordvector[sk1]=n2;
-
+              delete ed;
            }
            nodeRecord[actor]=n;
         }
         else if(nodeRecord.find(actor)!=nodeRecord.end())
-        {
-            
+        {  
              vector<string> Movie;
              vector<int> Year;
              vector<edge*> e4;
@@ -134,6 +136,8 @@ bool ActorGraph::buildGraphFromFile(const char* filename) {
              Year.push_back(year);
              ActorMovie[actor]=Movie;
              ActorYear[actor]=Year;
+             delete n->prev;
+             delete n; 
              //nodetoedge[n]=e1;
              if(edgeRecord.find(sk1)==edgeRecord.end())
              {
@@ -165,6 +169,7 @@ bool ActorGraph::buildGraphFromFile(const char* filename) {
                nodeStuff.push_back(nodeRecord[actor]);
                edgetonode[edgeRecord[sk1]]=nodeStuff;
                nodeRecordvector[sk1]=nodeStuff;
+               delete ed;
              }
 
              
@@ -202,6 +207,7 @@ bool ActorGraph::buildGraphFromFile(const char* filename) {
 void ActorGraph::BFS(const string& fromActor, const string& toActor,
              string& shortestPath)
 {
+     queue<node*> recordNode;
    cout<<"Hello there"<<endl; 
   if(nodeRecord.find(fromActor)==nodeRecord.end() ||
   nodeRecord.find(toActor)==nodeRecord.end())
@@ -504,7 +510,7 @@ void ActorGraph::Dijkstra(const string& fromActor, const string& toActor,
 }
 ActorGraph::~ActorGraph() {
 
-    tr1::unordered_map<string,vector<edge*> > emptymapping;
+ /*   tr1::unordered_map<string,vector<edge*> > emptymapping;
     tr1::unordered_map<node*,vector<edge*> > emptynodetoedge;
     tr1::unordered_map<edge*,vector<node*> > emptyedgetonode;
     tr1::unordered_map<string,edge*> emptyedgeRecord;
@@ -515,18 +521,40 @@ ActorGraph::~ActorGraph() {
     swap(edgetonode,emptyedgetonode);
     swap(edgeRecord,emptyedgeRecord);
     swap(nodeRecord,emptynodeRecord);
-    swap(nodeRecordvector,emptynodeRecordVector);
+    swap(nodeRecordvector,emptynodeRecordVector);*/
+
+   /* for(int a=0;a<node1.size();a++)
+   {
+       mapping.erase(node1[a]->name);
+       nodetoedge.erase(node1[a]);
+       nodeRecord.erase(node1[a]->name);
+    }*/
+   
+    /*for(int b=0;b<edge1.size();b++)
+    {
+      string mov=edge1[b]->movietitle;
+      int year125=edge1[b]->year;
+      stringstream ssYear1;
+       ssYear1 << year125;
+       string stringYear123=ssYear1.str();
+       stringYear123=mov+stringYear123;
+       edgetonode.erase(edge1[b]);
+       edgeRecord.erase(stringYear123);
+       nodeRecordvector.erase(stringYear123);
+    }*/
+
+
    for(int a=0;a<node1.size();a++)
    {
-       if(node1[a]!=NULL)
-       {
+      if(node1[a]!=NULL)
+      {
            if(node1[a]->prev!=NULL)
            {
                node* k=node1[a]->prev;
                delete k;
            }
            delete node1[a];
-       }
+      }
    }
    
      for(int a=0;a<edge1.size();a++)
@@ -537,14 +565,14 @@ ActorGraph::~ActorGraph() {
            {
                delete edge1[a];
            }
-           delete edge1[a];
+          // delete edge1[a];
        }
    }
 
 
    
    
-   for(int index=0;index<node1.size();index++)
+   /*for(int index=0;index<node1.size();index++)
    {
      vector<edge*> deleteEdge=mapping[node1[index]->name];
      for(int index1=0;index1<deleteEdge.size();index1++)
@@ -554,9 +582,9 @@ ActorGraph::~ActorGraph() {
           delete deleteEdge[index1];
          }
      }
-   }
+   }*/
 
-   for(int a=0;a<actorNames.size();a++)
+  /* for(int a=0;a<actorNames.size();a++)
    {
           if(actorNames[a]!=NULL)
           {          
@@ -569,7 +597,7 @@ ActorGraph::~ActorGraph() {
                 }
             }
           }
-   } 
+   } */
 
 
   
