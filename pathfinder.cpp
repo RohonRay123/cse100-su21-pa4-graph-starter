@@ -148,6 +148,6 @@ int main(int arg, char *argv[])
 
 
 
-    delete graph;
+    //delete graph;
     return 0;
 }
