@@ -1,19 +1,4 @@
 /**
- * TODO: add file header
- */
-
-#ifndef ACTORGRAPH_HPP
-#define ACTORGRAPH_HPP
-
-#include <iostream>
-#include <vector>
-#include<set>
-#include<iterator>
-#include<tr1/unordered_map>
-#include<queue>
-using namespace std;
-
-/**
  * TODO: add class header
  */
 
@@ -143,7 +128,6 @@ class ActorGraph {
     tr1::unordered_map<string,edge*> edgeRecord;
     tr1::unordered_map<string, node*> nodeRecord;
     tr1::unordered_map<string,vector<node*> >nodeRecordvector; //edgetonode
-    queue<node*> recordNode;
     vector<node*> node1;
     vector<edge*> edge1;
     //priority_queue<node*,vector<node*>,nodeCompare> nodePrior; 
@@ -168,3 +152,7 @@ class ActorGraph {
     ~ActorGraph();
 };
 #endif  // ACTORGRAPH_HP
+
+
+
+
