@@ -273,7 +273,7 @@ void ActorGraph::BFS(const string& fromActor, const string& toActor,
                  { 
                      if(a->isVisited==false)
                      {
-                         if(curr->distance<a->distance || a->distance==-1)
+                         if(curr->distance<a->distance)
                          {
                              a->prev=curr;
                              a->setDistance(curr->distance+1);
@@ -425,20 +425,20 @@ void ActorGraph::Dijkstra(const string& fromActor, const string& toActor,
                 // a->path="["+movie+"#"+"@"+yearString+"]";
                  if(a->prev==NULL)
                  {
-                  if(a->distance==-1)
-                  {
+                 // if(a->distance==-1)
+                  //{
                    a->prev=curr;
                    a->setDistance(curr->distance+rec->weight);
                    a->path="["+movie+"#"+"@"+yearString+"]";
                    nodePrior.push(noder[index1]);
-                  }
+                  //}
                  }
                  else if(a->prev!=NULL)
                  { 
                      //if(curr->prev!=a)
                     if(a->isVisited==false)
                      {
-                         if(curr->distance+rec->weight<a->distance || a->distance==-1)
+                         if(curr->distance+rec->weight<a->distance)
                          {
                              a->prev=curr;
                              a->setDistance(curr->distance+rec->weight);
