@@ -1,3 +1,4 @@
+
 #include "ActorGraph.hpp"
 #include <fstream>
 #include <iostream>
@@ -136,6 +137,10 @@ int main(int arg, char *argv[])
         }
     }
     
+    /*for(unsigned int x=0;x<pathways.size();x++)
+    {
+        outputFile<<pathways[x]<<endl;
+    }*/
     outputFile.close();
 
 
@@ -144,6 +149,6 @@ int main(int arg, char *argv[])
 
 
 
-    //delete graph;
+    delete graph;
     return 0;
 }
