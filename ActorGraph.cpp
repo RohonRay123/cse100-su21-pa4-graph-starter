@@ -1,6 +1,5 @@
 
 
-
 /**
  * TODO: add file header
  */
@@ -136,7 +135,7 @@ bool ActorGraph::buildGraphFromFile(const char* filename) {
              Year.push_back(year);
              ActorMovie[actor]=Movie;
              ActorYear[actor]=Year;
-             delete n->prev;
+             //delete n->prev;
              delete n; 
              //nodetoedge[n]=e1;
              if(edgeRecord.find(sk1)==edgeRecord.end())
@@ -273,7 +272,7 @@ void ActorGraph::BFS(const string& fromActor, const string& toActor,
                  { 
                      if(a->isVisited==false)
                      {
-                         if(curr->distance<a->distance)
+                         if(curr->distance<a->distance || a->distance==-1)
                          {
                              a->prev=curr;
                              a->setDistance(curr->distance+1);
@@ -425,20 +424,20 @@ void ActorGraph::Dijkstra(const string& fromActor, const string& toActor,
                 // a->path="["+movie+"#"+"@"+yearString+"]";
                  if(a->prev==NULL)
                  {
-                 // if(a->distance==-1)
-                  //{
+                  if(a->distance==-1)
+                  {
                    a->prev=curr;
                    a->setDistance(curr->distance+rec->weight);
                    a->path="["+movie+"#"+"@"+yearString+"]";
                    nodePrior.push(noder[index1]);
-                  //}
+                  }
                  }
                  else if(a->prev!=NULL)
                  { 
                      //if(curr->prev!=a)
                     if(a->isVisited==false)
                      {
-                         if(curr->distance+rec->weight<a->distance)
+                         if(curr->distance+rec->weight<a->distance || a->distance==-1)
                          {
                              a->prev=curr;
                              a->setDistance(curr->distance+rec->weight);
@@ -508,64 +507,56 @@ void ActorGraph::Dijkstra(const string& fromActor, const string& toActor,
       return;
   }
 }
-ActorGraph::~ActorGraph() {
-
- /*   tr1::unordered_map<string,vector<edge*> > emptymapping;
-    tr1::unordered_map<node*,vector<edge*> > emptynodetoedge;
-    tr1::unordered_map<edge*,vector<node*> > emptyedgetonode;
-    tr1::unordered_map<string,edge*> emptyedgeRecord;
-    tr1::unordered_map<string, node*> emptynodeRecord;
-    tr1::unordered_map<string,vector<node*> > emptynodeRecordVector;
-    swap(mapping,emptymapping);
-    swap(nodetoedge,emptynodetoedge);
-    swap(edgetonode,emptyedgetonode);
-    swap(edgeRecord,emptyedgeRecord);
-    swap(nodeRecord,emptynodeRecord);
-    swap(nodeRecordvector,emptynodeRecordVector);*/
-
-   /* for(int a=0;a<node1.size();a++)
-   {
-       mapping.erase(node1[a]->name);
-       nodetoedge.erase(node1[a]);
-       nodeRecord.erase(node1[a]->name);
-    }*/
-   
-    /*for(int b=0;b<edge1.size();b++)
+void nodeDelete(node*& deleteStuff)
+{
+    if(deleteStuff->prev==NULL)
     {
-      string mov=edge1[b]->movietitle;
-      int year125=edge1[b]->year;
-      stringstream ssYear1;
-       ssYear1 << year125;
-       string stringYear123=ssYear1.str();
-       stringYear123=mov+stringYear123;
-       edgetonode.erase(edge1[b]);
-       edgeRecord.erase(stringYear123);
-       nodeRecordvector.erase(stringYear123);
-    }*/
+        delete deleteStuff;
+    }
+    else{
+        nodeDelete(deleteStuff->prev);
+        delete deleteStuff;
+    }
+}
 
-
+ActorGraph::~ActorGraph() {  
    for(int a=0;a<node1.size();a++)
    {
-      if(node1[a]!=NULL)
+     /* if(node1[a]!=NULL)
       {
            if(node1[a]->prev!=NULL)
            {
                node* k=node1[a]->prev;
+               nodeDelete(k);
+           }
+           //delete node1[a];
+      }*/
+
+      if(node1[a]!=NULL)
+      {
+          delete node1[a];
+      } 
+   }
+   /*for(int a=0;a<actorNames.size();a++)
+   {
+      if(actorNames[a]!=NULL)
+      {
+           if(actorNames[a]->prev!=NULL)
+           {
+               node* k=actorNames[a]->prev;
                delete k;
            }
-           delete node1[a];
+           delete actorNames[a];
       }
-   }
+   }*/
    
      for(int a=0;a<edge1.size();a++)
    {
+      
+
        if(edge1[a]!=NULL)
        {
-           if(edge1[a]!=NULL)
-           {
-               delete edge1[a];
-           }
-          // delete edge1[a];
+           delete edge1[a];
        }
    }
 
@@ -599,7 +590,12 @@ ActorGraph::~ActorGraph() {
           }
    } */
 
-
+   nodetoedge.clear();
+   edgetonode.clear();
+   mapping.clear();
+   edgeRecord.clear();
+   nodeRecord.clear();
+   nodeRecordvector.clear();
   
 
 
